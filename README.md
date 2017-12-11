@@ -9,13 +9,13 @@ This script involves a little bit of web-scraping, data-parsing, database creati
 db_name = 'jucruz-final-project-db'
 db_user = 'your_terminal_username'
 db_password = 'your_computer_password'
-
 ```
 - Finally, you will need access to the PostgreSQL database server and (optionally) a database viewer (i.e. TeamSQL). Instructions to download the former can be found here: https://paper.dropbox.com/doc/Postgres-Database-setup-N4y2qlUr5BeP1X42Z5suc
 
 # What to Expect
 Once you're set up in your virtual environment, to run the code, type in the following command:
-``` python SI507F17_finalproject.py
+```
+python SI507F17_finalproject.py
 ```
 If it works successfully, you should see the following:
 ```
@@ -24,7 +24,6 @@ Fetching a fresh copy: https://www.826michigan.org/blog/page/2/
 Fetching a fresh copy: https://www.826michigan.org/blog/page/3/
 Success connecting to database
 Successfully transferred blog class data to Database
-
 ```
 Essentially what's happening in the background is as follows:
 - HTML data is scraped using BeautifulSoup and cached in a file called **cache_file_826michigan.json**
@@ -33,15 +32,14 @@ Essentially what's happening in the background is as follows:
 - This information is then input into a database called 'jucruz-final-project-db' in the form of two tables:
   - Blogs
   - Categories (They are linked by the Categories Primary Key)
-- 
+-
 
 
 # Libraries Used
-**psycopg2**: PostgreSQL adapter for the Python programming language
-**BeautifulSoup**: Used to extract data from HTML during web scraping
-**datetime**: For manipulating dates and times in both simple and complex ways
-**unittest**: Supports test automation
-
+- **psycopg2**: PostgreSQL adapter for the Python programming language
+- **BeautifulSoup**: Used to extract data from HTML during web scraping
+- **datetime**: For manipulating dates and times in both simple and complex ways
+- **unittest**: Supports test automation
 * Other built-in libraries include json and requests
 
 # Acknowledgments

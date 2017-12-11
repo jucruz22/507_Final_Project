@@ -1,68 +1,52 @@
-'''Step ONE:SETUP'''
-# Set up a virtual environment for your final Project. Libraries should include:
-    # - BeautifulSoup - for parsing the internet
-    # - requests - for requesting a specific page
-    # - psycopg2 - for using SQL
-# - Make sure you also ad a requirements.txt file!
+# Project Overview
+This script involves a little bit of web-scraping, data-parsing, database creation, and data visualization. The whole package! More specifically, I've scraped from the website of one of my favorite organizations; **826 Michigan** is a reading and writing center in Ann Arbor, pleasantly disguised a pirate supply shop (website: https://www.826michigan.org/)  
 
-'''STEP TWO: CACHING'''
-# - Set up your caching system. Borrow code from Project 3 which did something similar for data scraped from a website
-# - Remember to cite your caching function (i.e. Project 3)
-#
-'''STEP THREE: SCRAPING'''
-# - Use beautiful soup to find the blog posts you want on 826 website:
-    # - main site: https://www.826michigan.org/
-    # - blog page: https://www.826michigan.org/blog/
-    # - Click "See More" at bottom of page to collect more postings...
-#
-'''STEP FOUR: CLASSES'''
-# - Set up a Blog class for the data returned from scraping. Data extracted in the constructor should include:
-    # - Date posted
-    # - Blog URL
-    # - Blog Title
-    # - Blog Description
-# - Use a method in your class to format the date from:
-# "27" "Monday" "November 2017" to 11/27/2017 using datetime library
-# - Also include a __repr___ method (to make a unique ID for each blog post)
-# - Also include a __contains__ method (borrow from contains method in Project 3)
-# - Create another method (that uses the contains method) to categorize blogs into the following groups: Use if/else statments to make this a thing.
-    # - If title contains "FEATURED" --> "Featured Writing"
-    # - If title contains "826" --> "About the Org"
-    # (Once you get a look at the titles fully, think about other categories that might crop up)
+# Getting Started
+- To begin, you'll want to pip install all libraries included in the **requirements.txt** file into your own virtual environment. This code runs using Python 3.6.
+- You will also want a separate **creds.py** file (not included here) that contains the following (please note db_name should not be changed):
 
-'''STEP FIVE: DATABASE'''
-# - Use terminal commands to set up a database for this project. Use TeamSQL to visualize
-# - Borrow code from Project 6 to setup a database. Make two tables:
-#     - One for blog entries (Columns = ID, Title, URL, Description, Date, Category)
-#     - another for blog categories (Columns = ID, Category) *Make Sure you have at least 4 categories*
-# - Adapt Project 6 code to input data directly from your Class definition into the DATABASE (?)
+```
+db_name = 'jucruz-final-project-db'
+db_user = 'your_terminal_username'
+db_password = 'your_computer_password'
 
-'''STEP SIX: UNITTESTS'''
-# - Write unittests for your code. Borrow from Project 6 and Project 3 unittests
-# - Save these in a separate file named "SI507F17_finalproject_tests.py"
+```
+- Finally, you will need access to the PostgreSQL database server and (optionally) a database viewer (i.e. TeamSQL). Instructions to download the former can be found here: https://paper.dropbox.com/doc/Postgres-Database-setup-N4y2qlUr5BeP1X42Z5suc
 
-'''STEP SEVEN: VISUALIZATION'''
-(Get some more help from Jackie for this part...)
-# - Create an HTML file with the kind of template you want to portray in your final project (use code from Project 6.5 to do so). Would contain semantic information like:
-# - How many featured student pieces are there in the blog?
-# - Or use plotly to map out -
-# - Most common Category
-# -
+# What to Expect
+Once you're set up in your virtual environment, to run the code, type in the following command:
+``` python SI507F17_finalproject.py
+```
+If it works successfully, you should see the following:
+```
+Fetching a fresh copy: https://www.826michigan.org/blog
+Fetching a fresh copy: https://www.826michigan.org/blog/page/2/
+Fetching a fresh copy: https://www.826michigan.org/blog/page/3/
+Success connecting to database
+Successfully transferred blog class data to Database
 
-'''STEP EIGHT: README'''
-# - Use these instructions as the basis for your readme. Written in outline format, it tells us exactly what to do to understand and run your code:
-#
-# - Logistics of running code...
-#       - what precisely to type at a command prompt to run the code,
-#       - what name of database they must create for the code to work,
-#       - that they should pip install everything to `requirements.txt`,
-#       - what version of Python the project expects (e.g. Python 3),
-#       - if they need to fill in their own key and secret in a sample `secret_data.py` file in order to run the code, and what URLs they should go to to find the right key and secret…any information they might need)
-#
-# - And also...
-#     - Basically what happens when the code runs (e.g. what classes are defined or what a couple major functions’ input / output will be, what database tables are created and used…)
-#     - What the user should expect after the code runs (what should they see, what do any numbers they see represent, what will get created at the end — a file? a chart? — and how they can view it, etc)
-#
-# - Finally...
-#     - Links to any resources used (e.g. client libraries, API documentation) and citations of any code borrowed from elsewhere
-#     - Also include in the readme a list of everyone with whom you worked on any of the project or talked to about it in depth. Doing that is OK: sourcing help from others is great! But no two projects should be alike — this should be your own work.
+```
+Essentially what's happening in the background is as follows:
+- HTML data is scraped using BeautifulSoup and cached in a file called **cache_file_826michigan.json**
+- That data is then parsed through to acquire a list of blog HTML objects
+- A class Blog retrieves date, url, title, and description information for each of these objects
+- This information is then input into a database called 'jucruz-final-project-db' in the form of two tables:
+  - Blogs
+  - Categories (They are linked by the Categories Primary Key)
+- 
+
+
+# Libraries Used
+**psycopg2**: PostgreSQL adapter for the Python programming language
+**BeautifulSoup**: Used to extract data from HTML during web scraping
+**datetime**: For manipulating dates and times in both simple and complex ways
+**unittest**: Supports test automation
+
+* Other built-in libraries include json and requests
+
+# Acknowledgments
+- Many thanks to https://www.postgresql.org/ for their thorough documentation on how to interact with a database via Python
+- Additional gratitude for our class documentation, particularly from [Project 3](https://github.com/jucruz22/SI507-Project3) and [6](https://github.com/jucruz22/SI507-Project6)
+- Hats off to 826 Michigan for the work they do locally and for letting me peruse their site for educational purposes
+- Another dose of thanks to our "Code Champs" group within our SI 507 class, including Kenji Kaneko, Stefan Deuchler, and Vibhuti Kanitkar
+- And finally, rounds of applause to my noble teachers, [Jackie Cohen](https://github.com/aerenchyma) and [Anand Doshi](https://github.com/anandpdoshi) for their patient instruction, playful trouble-shooting, and empathetic skills throughout the process of my learning how to program in Python :)

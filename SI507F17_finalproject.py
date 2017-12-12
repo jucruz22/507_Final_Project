@@ -252,7 +252,7 @@ def top_five_words(blog_list,blog_cat=None):
 
     return blog_cat.upper(), top_five
 
-print (top_five_words(blog_objs,'Featured Writing'))
+# print (top_five_words(blog_objs,'Featured Writing'))
 
 # Make most common words from 826 blogs into its own html file
 f = open('826michigan.html','w')

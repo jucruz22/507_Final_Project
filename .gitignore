@@ -3,3 +3,4 @@ __pycache__/
 instructions.txt
 .DS_Store
 visualization.py
+creds.py

@@ -35,6 +35,8 @@ Essentially what's happening in the background is as follows:
   - Categories (They are linked by the Categories Primary Key)
 - That data is parsed even further to calculate the most common word for any given blog category. These most common words are portrayed via the creation of an html document **826michigan.html** which can be viewed in any browser, albeit hosted locally.
 
+** You may run tests on this code using **SI507F17_finalproject_tests.py** to make sure its working in your local environment. 
+
 
 # Libraries Used
 - **psycopg2**: PostgreSQL adapter for the Python programming language

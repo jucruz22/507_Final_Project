@@ -17,13 +17,14 @@ Once you're set up in your virtual environment, to run the code, type in the fol
 ```
 python SI507F17_finalproject.py
 ```
-If it works successfully, you should see the following:
+If it works successfully, you should see the following via your terminal:
 ```
 Fetching a fresh copy: https://www.826michigan.org/blog
 Fetching a fresh copy: https://www.826michigan.org/blog/page/2/
 Fetching a fresh copy: https://www.826michigan.org/blog/page/3/
 Success connecting to database
 Successfully transferred blog class data to Database
+Successfully created 826 Michigan html file
 ```
 Essentially what's happening in the background is as follows:
 - HTML data is scraped using BeautifulSoup and cached in a file called **cache_file_826michigan.json**
@@ -32,7 +33,7 @@ Essentially what's happening in the background is as follows:
 - This information is then input into a database called 'jucruz-final-project-db' in the form of two tables:
   - Blogs
   - Categories (They are linked by the Categories Primary Key)
--
+- That data is parsed even further to calculate the most common word for any given blog category. These most common words are portrayed via the creation of an html document **826michigan.html** which can be viewed in any browser, albeit hosted locally.
 
 
 # Libraries Used
@@ -40,11 +41,11 @@ Essentially what's happening in the background is as follows:
 - **BeautifulSoup**: Used to extract data from HTML during web scraping
 - **datetime**: For manipulating dates and times in both simple and complex ways
 - **unittest**: Supports test automation
-* Other built-in libraries include json and requests
+* Other built-in libraries include **json** and **requests**
 
 # Acknowledgments
 - Many thanks to https://www.postgresql.org/ for their thorough documentation on how to interact with a database via Python
-- Additional gratitude for our class documentation, particularly from [Project 3](https://github.com/jucruz22/SI507-Project3) and [6](https://github.com/jucruz22/SI507-Project6)
+- Additional gratitude for our class documentation, particularly from [Project 3](https://github.com/jucruz22/SI507-Project3) and [6](https://github.com/jucruz22/SI507-Project6) as well as some adapted code from last semester's 506 project.
 - Hats off to 826 Michigan for the work they do locally and for letting me peruse their site for educational purposes
 - Another dose of thanks to our "Code Champs" group within our SI 507 class, including Kenji Kaneko, Stefan Deuchler, and Vibhuti Kanitkar
 - And finally, rounds of applause to my noble teachers, [Jackie Cohen](https://github.com/aerenchyma) and [Anand Doshi](https://github.com/anandpdoshi) for their patient instruction, playful trouble-shooting, and empathetic skills throughout the process of my learning how to program in Python :)

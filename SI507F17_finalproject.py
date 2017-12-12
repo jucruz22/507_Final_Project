@@ -1,5 +1,5 @@
-from os import path
-from wordcloud import WordCloud
+# from os import path
+# from wordcloud import WordCloud
 from bs4 import BeautifulSoup
 from datetime import datetime
 from creds import *
@@ -234,34 +234,98 @@ print ("Successfully transfered blog class data to Database") # YASSSS :)
 """VISUALIZATION"""
 # Making a word cloud of most common words using blog description text
 # Code adapted from: https://github.com/amueller/word_cloud/blob/master/examples/simple.py
+def top_five_words(blog_list,blog_cat=None):
+    most_common = {}
 
+    # Selecting blogs by category
+    for b in blog_list:
+        if b.blog_category() == blog_cat:
+            for word in b.unique_words():
+                most_common[word] = most_common.get(word, 0) + 1
+        elif blog_cat==None:
+            for word in b.unique_words():
+                most_common[word] = most_common.get(word, 0) + 1
 
+    # Sorting
+    sort_most_common = sorted(most_common, key=lambda w: most_common[w], reverse=True)
+    top_five = sort_most_common[:5]
 
-"""EXPERIMENTATION"""
-# michigan826_html = CACHE_DICTION['https://www.826michigan.org/blog/']['html']
-# michigan826_soup = BeautifulSoup(michigan826_html,'html.parser')
-# # print(michigan826_soup)
-# # print (michigan826_soup)
-# blog_list = michigan826_soup.find("div",{"id":"content"}).find_all("div",{"class":"blog_cont"})
-# # print(len(blog_list)) # Success!
-# one_blog = blog_list[0]
-# date_of_month = one_blog.find("div",{"class":"blog_date sprites date_textbg"}).text
-# day_of_week = one_blog.find("div",{"class":"blog_cdaymonth"}).find("span").text
-# month_year = one_blog.find("div",{"class":"blog_cdaymonth"}).text
-# url = one_blog.find("div",{"class":"blog_title2"}).find('a')['href']
-# title = one_blog.find("div",{"class":"blog_title2"}).find('a').text
-# description = one_blog.find("div",{"class":"blog_text"}).find('p').text
-# month_year = month_year.split('y')[1]
-# day_month_year = str(date_of_month) + " " + month_year
-# dt_obj = datetime.strptime(day_month_year, '%d %B %Y')
-# converted_date = dt_obj.strftime('%Y-%m-%d')
+    return blog_cat.upper(), top_five
 
-# print(converted_date)
-# print(day_month_year)
-# print(month_year)
-# print(date_of_month)
-# print(day_of_week)
-# print (month_year) #  MondayNovember 2017
-# print(url)
-# print(title)
-# print (description)
+print (top_five_words(blog_objs,'Featured Writing'))
+
+# Make most common words from 826 blogs into its own html file
+f = open('826michigan.html','w')
+f.write("""
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>826 Michigan</title>
+	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+	<style>
+		body {
+			background-color: #e37600;
+		}
+	</style>
+</head>
+
+<body>
+	<p>These are the top 5 words referenced throught 826michigan's online blog:</p>
+
+	<h1>Entire Blog</h1>
+
+		<ol>
+			<li>detroit</li>
+			<li>826michigan</li>
+			<li>school</li>
+			<li>year</li>
+			<li>age</li>
+		</ol>
+
+	<p>These are the top 5 words per category:</p>
+
+	<h1>Featured Writing</h1>
+
+		<ol>
+			<li>age</li>
+			<li>friend</li>
+			<li>day</li>
+			<li>like</li>
+			<li>school</li>
+		</ol>
+
+	<h1>Featured Foundations</h1>
+
+		<ol>
+			<li>foundation</li>
+			<li>start</li>
+			<li>school</li>
+			<li>year</li>
+			<li>fall</li>
+		</ol>
+
+	<h1>Featured Supporter</h1>
+		<ol>
+			<li>writing</li>
+			<li>community</li>
+			<li>pizza</li>
+			<li>domino's</li>
+			<li>family</li>
+		</ol>
+
+	<h1>Other</h1>
+
+		<ol>
+			<li>826michigan</li>
+			<li>detroit</li>
+			<li>month</li>
+			<li>love</li>
+			<li>students</li>
+		</ol>
+
+</body>
+""")
+f.close()
+print ('Successfully created 826 Michigan html file')

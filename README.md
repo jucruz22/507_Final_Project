@@ -33,9 +33,10 @@ Essentially what's happening in the background is as follows:
 - This information is then input into a database called 'jucruz-final-project-db' in the form of two tables:
   - Blogs
   - Categories (They are linked by the Categories Primary Key)
-- That data is parsed even further to calculate the most common word for any given blog category. These most common words are portrayed via the creation of an html document **826michigan.html** which can be viewed in any browser, albeit hosted locally.
+- That data is parsed even further to calculate the most common word for any given blog category. These most common words are portrayed via the creation of an html document **826michigan.html** which can be viewed in any browser, albeit hosted locally. See [example_image.html](example_image.html) for an example
 
-** You may run tests on this code using **SI507F17_finalproject_tests.py** to make sure its working in your local environment. 
+
+** You may run tests on this code using **SI507F17_finalproject_tests.py** to make sure its working in your local environment.
 
 
 # Libraries Used

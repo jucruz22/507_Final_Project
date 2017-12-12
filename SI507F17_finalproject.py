@@ -1,8 +1,10 @@
-import psycopg2
-import psycopg2.extras
+from os import path
+from wordcloud import WordCloud
 from bs4 import BeautifulSoup
 from datetime import datetime
 from creds import *
+import psycopg2
+import psycopg2.extras
 import unittest
 import requests
 import json
@@ -105,7 +107,7 @@ class Blog(object):
         return category
 
     def unique_words(self):
-        punctuation = '()!@#$%^&*?~.…'
+        punctuation = '()!@#$%^&*?~.,…'
         lower_case = self.description.lower()
         temp = lower_case.split() # split text string by its spaces
         word_list = []
@@ -231,6 +233,7 @@ print ("Successfully transfered blog class data to Database") # YASSSS :)
 
 """VISUALIZATION"""
 # Making a word cloud of most common words using blog description text
+# Code adapted from: https://github.com/amueller/word_cloud/blob/master/examples/simple.py
 
 
 

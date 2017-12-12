@@ -11,6 +11,14 @@ import json
 CACHE_FNAME = 'cache_file_826michigan.json'
 DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
+# For visualization later...
+stop_words = []
+fstop = open('stop_words.txt', 'r')
+for word in fstop.readlines():
+    # stop_words.append(unicode(word.strip()))
+    stop_words.append(word.strip())
+fstop.close()
+
 """CACHING"""
 # If CACHE exists, convert to dictionary format using json.loads()
 try:
@@ -95,6 +103,28 @@ class Blog(object):
         else:
             category = 'Other'
         return category
+
+    def unique_words(self):
+        punctuation = '()!@#$%^&*?~.…'
+        lower_case = self.description.lower()
+        temp = lower_case.split() # split text string by its spaces
+        word_list = []
+
+        # getting rid of punctuation in all the words
+        for w in temp:
+            for ch in w:
+                if ch in punctuation:
+                    removed = w.replace(ch, "")
+                    w = removed
+            word_list.append(w)
+
+        # getting rid of stop words
+        unique_words = []
+        for w in word_list:
+            if w not in stop_words:
+                unique_words.append(w)
+
+        return unique_words
 
     def __repr__(self):
         month_year = self.month_year.split('y')[1]
@@ -199,7 +229,8 @@ conn.commit()
 print ("Successfully transfered blog class data to Database") # YASSSS :)
 
 
-
+"""VISUALIZATION"""
+# Making a word cloud of most common words using blog description text
 
 
 

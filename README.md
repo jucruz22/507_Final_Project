@@ -34,6 +34,7 @@ Essentially what's happening in the background is as follows:
   - Blogs
   - Categories (They are linked by the Categories Primary Key)
 - That data is parsed even further to calculate the most common word for any given blog category. These most common words are portrayed via the creation of an html document **826michigan.html** which can be viewed in any browser, albeit hosted locally. See [example_image](example_image.png) for an example
+- Finally, a word cloud is generated of these most popular words. See [826michigan_wordcloud](826_wordcloud.png)
 
 
 ** You may run tests on this code using **SI507F17_finalproject_tests.py** to make sure its working in your local environment.
@@ -48,6 +49,7 @@ Essentially what's happening in the background is as follows:
 
 # Acknowledgments
 - Many thanks to https://www.postgresql.org/ for their thorough documentation on how to interact with a database via Python
+- Thank you to Andreas Mueller on his documentation on how to make a wordcloud: https://github.com/amueller/word_cloud
 - Additional gratitude for our class documentation, particularly from [Project 3](https://github.com/jucruz22/SI507-Project3) and [6](https://github.com/jucruz22/SI507-Project6) as well as some adapted code from last semester's 506 project.
 - Hats off to 826 Michigan for the work they do locally and for letting me peruse their site for educational purposes
 - Another dose of thanks to our "Code Champs" group within our SI 507 class, including Kenji Kaneko, Stefan Deuchler, and Vibhuti Kanitkar

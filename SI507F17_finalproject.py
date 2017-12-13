@@ -1,5 +1,7 @@
-# from os import path
-# from wordcloud import WordCloud
+from os import path
+from wordcloud import WordCloud
+import numpy as np
+from PIL import Image
 from bs4 import BeautifulSoup
 from datetime import datetime
 from creds import *
@@ -231,9 +233,34 @@ conn.commit()
 print ("Successfully transfered blog class data to Database") # YASSSS :)
 
 
-"""VISUALIZATION"""
+"""VISUALIZATION - WORD CLOUD"""
 # Making a word cloud of most common words using blog description text
 # Code adapted from: https://github.com/amueller/word_cloud/blob/master/examples/simple.py
+massive_str = ""
+for b in blog_objs:
+    massive_str = massive_str + b.description
+
+# print(massive_str)
+
+d = path.dirname(__file__)
+
+# Read the whole text.
+text = open(path.join(d, '826michigan_words.txt')).read()
+# print(text)
+
+# Generate a word cloud image
+mask = np.array(Image.open(path.join(d,'gear.png')))
+wordcloud = WordCloud(background_color="white",max_words=len(massive_str),mask=mask).generate(massive_str)
+wordcloud.to_file(path.join(d,'826_wordcloud.png'))
+print('Successfully created wordcloud PNG file')
+
+# Display the generated image:
+# the matplotlib way:
+import matplotlib.pyplot as plt
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+
+"""VISUALIZATION - HTML"""
 def top_five_words(blog_list,blog_cat=None):
     most_common = {}
 
